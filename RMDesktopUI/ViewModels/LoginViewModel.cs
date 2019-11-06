@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using RMDesktopUI.Helpers;
+using RMDesktopUI.Library.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,6 +88,9 @@ namespace RMDesktopUI.ViewModels
             {
                ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
+
+                //TODO - Capture more information about the user
+                await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
             }
             catch (Exception ex)
             {
