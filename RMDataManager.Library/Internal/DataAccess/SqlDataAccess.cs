@@ -23,9 +23,9 @@ namespace RMDataManager.Library.Internal.DataAccess
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
+                //TODO - lastName null ?? 
                 List<T> rows = connection.Query<T>(storedProcedure, parameters, 
                     commandType: CommandType.StoredProcedure).ToList();
-
                 return rows;
             }
         }
