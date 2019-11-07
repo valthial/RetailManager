@@ -207,8 +207,10 @@ namespace RMDesktopUI.ViewModels
             get
             {
                 bool output = false;
+                if (Cart.Count >0 )
+                {
 
-                //Make sure there is something  in the cart
+                }
 
                 return output;
             }
@@ -216,7 +218,7 @@ namespace RMDesktopUI.ViewModels
 
         public void CheckOut()
         {
-
+            //Create a SaleModel and post to the API
         }
     }
 }
