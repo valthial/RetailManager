@@ -14,13 +14,21 @@ namespace RMDesktopUI.ViewModels
     {
         IProductEndpoint _productEndpoint;
 
-        public async Task SalesViewModel(IProductEndpoint productEndpoint)
+        public SalesViewModel(IProductEndpoint productEndpoint)
         {
             _productEndpoint = productEndpoint;
+        }
+
+        protected override async void OnViewLoaded(object view)
+        {
+            await LoadProducts();
+        }
+
+        private async Task LoadProducts()
+        {
             var productList = await _productEndpoint.GetAll();
             Products = new BindingList<ProductModel>(productList);
         }
-
 
         private BindingList<ProductModel> _products;
 
