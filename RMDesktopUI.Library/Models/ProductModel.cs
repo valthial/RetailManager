@@ -33,7 +33,6 @@ namespace RMDesktopUI.Library.Models
         /// The number of the available products that are in the stock.
         /// </summary>
         public int QuantityInStock { get; set; }
-
-        
+ 
     }
 }
