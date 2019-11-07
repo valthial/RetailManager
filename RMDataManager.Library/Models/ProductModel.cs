@@ -33,5 +33,12 @@ namespace RMDataManager.Library.Models
         /// </summary>
         public int QuantityInStock { get; set; }
 
+        /// <summary>
+        /// True means that the product in the cart is taxable 
+        /// False for the not taxable products.
+        /// </summary>
+        public bool IsTaxable { get; set; }
+
+
     }
 }

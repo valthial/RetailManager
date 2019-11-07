@@ -33,6 +33,12 @@ namespace RMDesktopUI.Library.Models
         /// The number of the available products that are in the stock.
         /// </summary>
         public int QuantityInStock { get; set; }
- 
+
+        /// <summary>
+        /// True means that the product in the cart is taxable 
+        /// False for the not taxable products.
+        /// </summary>
+        public bool IsTaxable { get; set; }
+
     }
 }
