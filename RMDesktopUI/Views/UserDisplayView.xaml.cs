@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RMDesktopUI.ViewModels
+namespace RMDesktopUI.Views
 {
     /// <summary>
-    /// Interaction logic for StatusInfoView.xaml
+    /// Interaction logic for UserDisplayView.xaml
     /// </summary>
-    public partial class StatusInfoView : UserControl
+    public partial class UserDisplayView : UserControl
     {
-        public StatusInfoView()
+        public UserDisplayView()
         {
             InitializeComponent();
         }
