@@ -31,6 +31,7 @@ namespace RMDesktopUI.ViewModels
 
         protected override async void OnViewLoaded(object view)
         {
+            base.OnViewLoaded(view);
             await LoadProducts();
         }
 
