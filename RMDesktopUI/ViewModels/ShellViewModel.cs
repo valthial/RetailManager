@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using RMDesktopUI.EventModels;
+using RMDesktopUI.Library.Api;
 using RMDesktopUI.Library.Models;
 
 namespace RMDesktopUI.ViewModels
@@ -14,22 +15,19 @@ namespace RMDesktopUI.ViewModels
         private IEventAggregator _events;
         private SalesViewModel _salesVM;
         private ILoggedInUserModel _user;
+        private IAPIHelper _apiHelper;
 
-        public ShellViewModel(IEventAggregator events, SalesViewModel salesVM, ILoggedInUserModel user)
+        public ShellViewModel(IEventAggregator events, SalesViewModel salesVM, ILoggedInUserModel user, IAPIHelper apiHelper)
         {
             _events = events;
             _salesVM = salesVM;
             _user = user;
+            _apiHelper = apiHelper;
 
             _events.Subscribe(this);
             
             ActivateItem(IoC.Get<LoginViewModel>());
         }
-        public void ExitApplication()
-        {
-            TryClose();
-        }
-        
         public bool IsLoggedIn
         {
             get
@@ -44,9 +42,14 @@ namespace RMDesktopUI.ViewModels
                 return output;
             }
         }
+        public void ExitApplication()
+        {
+            TryClose();
+        }
         public void LogOut()
         {
-            _user.LogOffUser();
+            _user.ResetUserModel();
+            _apiHelper.LogOffUser();
             ActivateItem(IoC.Get<LoginViewModel>());
             NotifyOfPropertyChange(() => IsLoggedIn);
         }
