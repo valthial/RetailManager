@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using RMApi.Data;
 using RMApi.Models;
 using RMDataManager.Library.DataAccess;
@@ -21,20 +22,24 @@ namespace RMApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private IConfiguration _config;
 
         public ApplicationDbContext _context { get; }
 
-        public UserController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public UserController(ApplicationDbContext context, 
+            UserManager<IdentityUser> userManager,
+            IConfiguration config)
         {
             _context = context;
            _userManager = userManager;
+            _config = config;
         }
 
         [HttpGet]
         public UserModel GetById()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //old way - RequestContext.Principal.Identity.GetUserId();
-            UserData data = new UserData();
+            UserData data = new UserData(_config);
 
             return data.GetUserById(userId).First();
         }
