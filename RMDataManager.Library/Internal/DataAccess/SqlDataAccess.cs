@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RMDataManager.Library.Internal.DataAccess
 {
-    internal class SqlDataAccess : IDisposable
+    public class SqlDataAccess : IDisposable, ISqlDataAccess
     {
 
         public SqlDataAccess(IConfiguration config)
@@ -24,14 +24,14 @@ namespace RMDataManager.Library.Internal.DataAccess
             return _config.GetConnectionString(name);
         }
 
-        public List<T> LoadData<T,U>(string storedProcedure, U parameters ,string connectionStringName)
+        public List<T> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName)
         {
             string connectionString = GetConnectionString(connectionStringName);
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                
-                List<T> rows = connection.Query<T>(storedProcedure, parameters, 
+
+                List<T> rows = connection.Query<T>(storedProcedure, parameters,
                     commandType: CommandType.StoredProcedure).ToList();
                 return rows;
             }
@@ -93,7 +93,7 @@ namespace RMDataManager.Library.Internal.DataAccess
         }
 
         public void Dispose()
-        { 
+        {
             if (isClosed == false)
             {
                 try
